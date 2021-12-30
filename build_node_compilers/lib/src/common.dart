@@ -38,14 +38,14 @@ Future<File> createPackagesFile(Iterable<AssetId> allAssets) async {
 void validateOptions(Map<String, dynamic> config, List<String> supportedOptions,
     String builderKey,
     {List<String>? deprecatedOptions}) {
-  deprecatedOptions ??= [];
-  var unsupported = config.keys.where(
-      (o) => !supportedOptions.contains(o) && !deprecatedOptions!.contains(o));
+  final depOptions = deprecatedOptions ?? [];
+  var unsupported = config.keys
+      .where((o) => !supportedOptions.contains(o) && !depOptions.contains(o));
   if (unsupported.isNotEmpty) {
     throw ArgumentError.value(unsupported.join(', '), builderKey,
         'only $supportedOptions are supported options, but got');
   }
-  var deprecated = config.keys.where(deprecatedOptions.contains);
+  var deprecated = config.keys.where(depOptions.contains);
   if (deprecated.isNotEmpty) {
     log.warning('Found deprecated options ${deprecated.join(', ')}. These no '
         'longer have any effect and should be removed.');
