@@ -76,5 +76,5 @@ bool _readUseIncrementalCompilerOption(BuilderOptions options) {
   return options.config[_useIncrementalCompilerOption] as bool ?? true;
 }
 
-Map<String, dynamic> _previousDdcConfig;
+Map<String, dynamic>? _previousDdcConfig;
 const _useIncrementalCompilerOption = 'use-incremental-compiler';

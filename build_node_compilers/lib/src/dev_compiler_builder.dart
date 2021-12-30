@@ -27,7 +27,7 @@ class DevCompilerBuilder implements Builder {
   final DartPlatform platform;
 
   /// The sdk kernel file for the current platform.
-  final String sdkKernelPath;
+  final String? sdkKernelPath;
 
   /// The root directory of the platform's dart SDK.
   ///
@@ -44,11 +44,11 @@ class DevCompilerBuilder implements Builder {
   final String librariesPath;
 
   DevCompilerBuilder(
-      {bool useIncrementalCompiler,
-      @required this.platform,
+      {bool? useIncrementalCompiler,
+      required this.platform,
       this.sdkKernelPath,
-      String librariesPath,
-      String platformSdk})
+      String? librariesPath,
+      String? platformSdk})
       : useIncrementalCompiler = useIncrementalCompiler ?? true,
         platformSdk = platformSdk ?? sdkDir,
         librariesPath = librariesPath ??
@@ -99,7 +99,7 @@ Future<void> _createDevCompilerModule(
     BuildStep buildStep,
     bool useIncrementalCompiler,
     String dartSdk,
-    String sdkKernelPath,
+    String? sdkKernelPath,
     String librariesPath,
     {bool debugMode = true}) async {
   var transitiveDeps = await buildStep.trackStage('CollectTransitiveDeps',
